@@ -1,0 +1,8 @@
+# Redirect from / to /index.html (No .html in URL)
+/  /index.html  200
+
+# Redirect from /stage2 to /stage2.html
+/stage2  /stage2.html  200
+
+# Redirect from /stage3 to /stage3.html
+/stage3  /stage3.html  200
